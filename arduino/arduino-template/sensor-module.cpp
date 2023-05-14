@@ -9,6 +9,7 @@
 #include "sensor-module.h"
 #include "Arduino.h"
 
+// base sensor
 SensorModule::SensorModule()
   : base(nullptr) {
 }
@@ -117,7 +118,7 @@ bool SensorModule::isModulePresent(uint8_t index) {
         return true;
 }
 
-// ================================================================================================= //
+// =================================================================================================
 // sensor debugging
 SensorDebug::SensorDebug()
   : label("LABEL"), data("DATA"), labelCount(0), dataCount(0), send2Sheet(true), separator(",") {

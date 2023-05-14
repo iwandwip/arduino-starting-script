@@ -1,13 +1,13 @@
 #include "sensor-module.h"
-#include "abstract-sens.h"
 #include "MemoryFree.h"
+#include "load-cell.h"
 
 SensorModule sensor;
 float value;
 
 void setup() {
         Serial.begin(9600);
-        sensor.addModule(new Abstract(A0));
+        sensor.addModule(new LoadCell(3, 4));
         sensor.init();
 }
 

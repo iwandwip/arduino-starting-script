@@ -17,13 +17,13 @@ SerialCom::SerialCom() {
 }
 
 void SerialCom::addData(const char* newData, const char* separator) {
-        dataSend += newData;
         dataSend += separator;
+        dataSend += newData;
 }
 
 void SerialCom::addData(float newData, const char* separator) {
-        dataSend += String(newData);
         dataSend += separator;
+        dataSend += String(newData);
 }
 
 void SerialCom::clearData() {
