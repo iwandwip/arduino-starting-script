@@ -8,12 +8,14 @@
 #include "serial-com.h"
 #include "SoftwareSerial.h"
 
-SoftwareSerial espSerial(2, 3);
+#define USING_SERIAL espSerial
+
+SoftwareSerial USING_SERIAL(2, 3);
 
 SerialCom::SerialCom() {
         dataSend = "";
-        espSerial.begin(9600);
-        espSerial.println();
+        USING_SERIAL.begin(9600);
+        USING_SERIAL.println();
 }
 
 void SerialCom::addData(const char* newData, const char* separator) {
@@ -33,20 +35,20 @@ void SerialCom::clearData() {
 void SerialCom::sendData(uint32_t __t) {
         if (millis() - sendTime >= __t) {
                 sendTime = millis();
-                espSerial.println(dataSend);
+                USING_SERIAL.println(dataSend);
                 Serial.println(dataSend);
         }
 }
 
 void SerialCom::receive(void (*onReceive)(String)) {
         if (onReceive == nullptr) return;
-        if (espSerial.available()) {
+        if (USING_SERIAL.available()) {
                 char rxBuffer[250];
                 uint8_t rxBufferPtr = 0;
-                rxBuffer[rxBufferPtr++] = espSerial.read();
+                rxBuffer[rxBufferPtr++] = USING_SERIAL.read();
                 while (1) {
-                        if (espSerial.available()) {
-                                rxBuffer[rxBufferPtr++] = espSerial.read();
+                        if (USING_SERIAL.available()) {
+                                rxBuffer[rxBufferPtr++] = USING_SERIAL.read();
                                 if (rxBuffer[rxBufferPtr - 1] == '\n') break;
                         }
                 }

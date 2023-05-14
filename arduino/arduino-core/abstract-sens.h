@@ -17,11 +17,12 @@
 class Abstract : public BaseSens {
       private:
         uint8_t sensorPin;
-
         float* templateValue;
+
         uint32_t update_tm;
         uint32_t debug_tm;
         uint32_t* cal_tm;
+        
         bool isCalibrate;
 
         float getSensorAverage(float sensorValue, int numReadings = 10);
