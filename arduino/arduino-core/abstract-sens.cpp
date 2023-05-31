@@ -89,6 +89,10 @@ void Abstract::getSensorValue(float* value) {
 void Abstract::getSensorValue(int* value) {
 }
 
+void Abstract::setCallBack(void (*callbackFunc)(void)) {
+        thisCallbackFunc = callbackFunc;
+}
+
 void Abstract::count() {
 }
 
