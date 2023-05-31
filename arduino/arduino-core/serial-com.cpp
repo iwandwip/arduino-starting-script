@@ -6,6 +6,7 @@
  */
 
 #include "serial-com.h"
+
 #include "SoftwareSerial.h"
 
 #define USING_SERIAL espSerial
@@ -24,6 +25,11 @@ void SerialCom::addData(const char* newData, const char* separator) {
 }
 
 void SerialCom::addData(float newData, const char* separator) {
+        dataSend += String(newData);
+        dataSend += separator;
+}
+
+void SerialCom::addData(int newData, const char* separator) {
         dataSend += String(newData);
         dataSend += separator;
 }
@@ -67,7 +73,7 @@ String SerialCom::getStrData(String data, uint8_t index) {
 
 String SerialCom::parseStr(String data, char separator[], int index) {
         int found = 0;
-        int strIndex[] = { 0, -1 };
+        int strIndex[] = {0, -1};
         int maxIndex = data.length() - 1;
         for (int i = 0; i <= maxIndex && found <= index; i++) {
                 if (data.charAt(i) == separator[0] || i == maxIndex) {
