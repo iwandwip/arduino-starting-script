@@ -1,2 +1,2 @@
-# sinau-template
-Belajar template c++
+# arduino-starting-script
+arduino starting script for project
