@@ -1,0 +1,6 @@
+#pragma once
+
+#ifdef TEMPLATE_CONTROLLER
+#define TEMPLATE_CONTROLLER
+
+#endif  // TEMPLATE_CONTROLLER

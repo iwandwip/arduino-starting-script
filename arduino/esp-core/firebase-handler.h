@@ -11,44 +11,26 @@
 #define FIREBASE_HANDLER_H
 
 #include "Arduino.h"
+#include "Firebase_ESP_Client.h"
+#include "WiFi.h"
 #include "stdint.h"
 
-#if defined(ESP32)
-#include <WiFi.h>
-#include <stdio.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#elif defined(ESP8266)
-#include <ESP8266WiFi.h>
-#include "ets_sys.h"
-#include "osapi.h"
-#include "os_type.h"
-#endif
+#define API_KEY "AIzaSyAzYdsu_LMrp86Ec3oezJsJdckmh1_FWPM"
+#define DATABASE_URL "https://water-quality-control-616f0-default-rtdb.firebaseio.com/"
 
-#include "Firebase_ESP_Client.h"
-
-#define API_KEY "AIzaSyB5_cRkAsznDYmkAYnWaqdozHYbkBz8iRI"
-#define DATABASE_URL "https://infusion-checker-default-rtdb.firebaseio.com/"
-
-#define USER_EMAIL "infusion-checker@gmail.com"
-#define USER_PASSWORD "infusion-checker"
+#define USER_EMAIL "water-quality@gmail.com"
+#define USER_PASSWORD "water-quality"
 
 #define NTP_SERVER "pool.ntp.org"
 #define GMT_OFFSET_SEC 3600
 #define GMT_OFFSET_WIB GMT_OFFSET_SEC * 7
 #define DAYLIGHT_OFFSET 3600
 
-#if defined(ESP32)
 void serverHandler(void* pvParameter);
-#elif defined(ESP8266)
-void serverHandler(os_event_t* events);
-#endif
 
 class FirebaseModule {
-      private:
-#if defined(ESP32)
+       private:
         TaskHandle_t* serverTask = nullptr;
-#endif
         FirebaseData* fbdo = nullptr;
         FirebaseAuth* auth = nullptr;
         FirebaseConfig* config = nullptr;
@@ -61,13 +43,14 @@ class FirebaseModule {
         uint32_t sendTime;
         uint32_t getTime;
         bool connect;
-      public:
+
+       public:
         FirebaseModule(uint8_t coreIndex = 1);
         ~FirebaseModule();
         bool init();
         bool connectToWiFi(const char* ssid, const char* pwd);
         bool isConnect();
-        void update(void (*onUpdate)(void) = nullptr);
+        bool update(void (*onUpdate)(void) = nullptr);
         void addData(float newData, const char* newAddressData);
         void sendData(uint32_t __time = 2000);
         void clearData();

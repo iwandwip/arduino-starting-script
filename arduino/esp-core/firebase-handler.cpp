@@ -7,20 +7,16 @@
 
 #include "firebase-handler.h"
 
-#include "addons/TokenHelper.h"
 #include "addons/RTDBHelper.h"
+#include "addons/TokenHelper.h"
 
 FirebaseModule::FirebaseModule(uint8_t coreIndex) {
         fbdo = new FirebaseData;
         auth = new FirebaseAuth;
         config = new FirebaseConfig;
-        configTime(GMT_OFFSET_WIB, DAYLIGHT_OFFSET, NTP_SERVER);
-#if defined(ESP32)
         serverTask = new TaskHandle_t;
+        configTime(GMT_OFFSET_WIB, DAYLIGHT_OFFSET, NTP_SERVER);
         xTaskCreatePinnedToCore(serverHandler, "server_task", 20000, NULL, 1, serverTask, coreIndex);
-#elif defined(ESP8266)
-        system_os_task(serverHandler, 0, NULL, 2048);
-#endif
 }
 
 FirebaseModule::~FirebaseModule() {
@@ -61,7 +57,7 @@ bool FirebaseModule::isConnect() {
         return connect && Firebase.ready();
 }
 
-void FirebaseModule::update(void (*onUpdate)(void)) {
+bool FirebaseModule::update(void (*onUpdate)(void)) {
         onUpdate();
 }
 
@@ -114,14 +110,14 @@ void FirebaseModule::setString(String strData, const char* addrs) {
 }
 
 float FirebaseModule::getData(const char* getAddress) {
-        if (Firebase.ready() && Firebase.RTDB.getFloat(fbdo, (getAddress))) {
+        if (Firebase.ready() && Firebase.RTDB.getFloat(fbdo, F(getAddress))) {
                 return fbdo->to<float>();
         }
         return 0.0;
 }
 
 String FirebaseModule::getStrData(const char* getAddress) {
-        if (Firebase.ready() && Firebase.RTDB.getString(fbdo, (getAddress))) {
+        if (Firebase.ready() && Firebase.RTDB.getString(fbdo, F(getAddress))) {
                 return fbdo->to<String>();
         }
         return "";
