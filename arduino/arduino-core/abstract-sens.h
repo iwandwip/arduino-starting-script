@@ -39,6 +39,7 @@ class Abstract : public BaseSens {
         void calibrate() override;
         void getSensorValue(float* value) override;
         void getSensorValue(int* value) override;
+        void getSensorValue(char* value) override;
         void setCallBack(void (*callbackFunc)(void)) override;
         void count() override;
         void reset() override;

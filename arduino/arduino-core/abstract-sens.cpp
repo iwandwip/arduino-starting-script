@@ -89,6 +89,9 @@ void Abstract::getSensorValue(float* value) {
 void Abstract::getSensorValue(int* value) {
 }
 
+void Abstract::getSensorValue(char* value) {
+}
+
 void Abstract::setCallBack(void (*callbackFunc)(void)) {
         thisCallbackFunc = callbackFunc;
 }
