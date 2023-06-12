@@ -16,16 +16,14 @@
 
 class Abstract : public BaseSens {
       private:
-      void (*thisCallbackFunc)(void) = nullptr;
-        uint8_t sensorPin;
-        float* templateValue;
+        float arrTemplateValue[6];
+        float templateValue;
+        uint32_t sensTimer[3];
 
-        uint32_t update_tm;
-        uint32_t debug_tm;
-        uint32_t* cal_tm;
-        
         bool isCalibrate;
+        uint8_t sensorPin;
 
+        void (*thisCallbackFunc)(void) = nullptr;
         float getSensorAverage(float sensorValue, int numReadings = 10);
         float lowPassFilter(float input, float output, float alpha);
       public:
@@ -37,9 +35,11 @@ class Abstract : public BaseSens {
         void update() override;
         void debug() override;
         void calibrate() override;
-        void getSensorValue(float* value) override;
-        void getSensorValue(int* value) override;
-        void getSensorValue(char* value) override;
+
+        void getValue(float* output) override;
+        void getValue(int* output) override;
+        void getValue(char* output) override;
+
         void setCallBack(void (*callbackFunc)(void)) override;
         void count() override;
         void reset() override;

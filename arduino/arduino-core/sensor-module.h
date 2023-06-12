@@ -29,9 +29,9 @@ class BaseSens {
         virtual void update() = 0;
         virtual void debug() = 0;
         virtual void calibrate() = 0;
-        virtual void getSensorValue(float* value) = 0;
-        virtual void getSensorValue(int* value) = 0;
-        virtual void getSensorValue(char* value) = 0;
+        virtual void getValue(float* output) = 0;
+        virtual void getValue(int* output) = 0;
+        virtual void getValue(char* output) = 0;
         virtual void setCallBack(void (*callbackFunc)(void)) = 0;
         virtual void count() = 0;
         virtual void reset() = 0;
