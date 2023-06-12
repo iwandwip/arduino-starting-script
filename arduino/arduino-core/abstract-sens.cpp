@@ -7,7 +7,7 @@
 
 #include "abstract-sens.h"
 #include "Arduino.h"
-#include "SimpleKalmanFilter.h"
+#include "sensor-filter.h"
 
 #define SENSOR_FILTER_KF 8
 
@@ -36,7 +36,7 @@ void Abstract::update() {
                         templateValue = templateValue + (templateValue * SENSOR_FILTER_KF);
                         templateValue /= SENSOR_FILTER_KF + 1;
                 } else {
-                        SimpleKalmanFilter* sensorKf = new SimpleKalmanFilter(2, 2, 0.01);
+                        KalmanFilter* sensorKf = new KalmanFilter(2, 2, 0.01);
                         arrTemplateValue[SENS_RET_RAW_DATA] = analogRead(sensorPin);
                         arrTemplateValue[SENS_RET_ACT_DATA] = arrTemplateValue[SENS_RET_RAW_DATA] + (arrTemplateValue[SENS_RET_RAW_DATA] * SENSOR_FILTER_KF);
                         arrTemplateValue[SENS_RET_ACT_DATA] /= SENSOR_FILTER_KF + 1;
