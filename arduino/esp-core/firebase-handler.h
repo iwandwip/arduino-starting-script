@@ -17,6 +17,7 @@
 
 #define API_KEY "AIzaSyAzYdsu_LMrp86Ec3oezJsJdckmh1_FWPM"
 #define DATABASE_URL "https://water-quality-control-616f0-default-rtdb.firebaseio.com/"
+#define STORAGE_BUCKET_ID "water-quality.appspot.com"
 
 #define USER_EMAIL "water-quality@gmail.com"
 #define USER_PASSWORD "water-quality"
