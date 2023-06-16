@@ -47,6 +47,11 @@ void SensorModule::debug(int __index) {
         }
 }
 
+void SensorModule::loop(void (*loop)(void)) {
+        if (loop == nullptr) return;
+        loop();
+}
+
 void SensorModule::addModule(BaseSens* sensModule) {
         BaseSens** newBase = (BaseSens**)realloc(base, (len + 1) * sizeof(BaseSens*));  // Increase length by 1
         if (newBase == nullptr) {

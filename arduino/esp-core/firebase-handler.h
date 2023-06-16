@@ -15,12 +15,11 @@
 #include "WiFi.h"
 #include "stdint.h"
 
-#define API_KEY "AIzaSyAzYdsu_LMrp86Ec3oezJsJdckmh1_FWPM"
-#define DATABASE_URL "https://water-quality-control-616f0-default-rtdb.firebaseio.com/"
-#define STORAGE_BUCKET_ID "water-quality.appspot.com"
+#define API_KEY "AIzaSyCJgnZh9hEy_4dSLUSuLRlVw4lo6P3XmU8"
+#define DATABASE_URL "https://auto-hydro-barra-default-rtdb.firebaseio.com/"
 
-#define USER_EMAIL "water-quality@gmail.com"
-#define USER_PASSWORD "water-quality"
+#define USER_EMAIL "auto-hydro@gmail.com"
+#define USER_PASSWORD "auto-hydro"
 
 #define NTP_SERVER "pool.ntp.org"
 #define GMT_OFFSET_SEC 3600
@@ -30,7 +29,7 @@
 void serverHandler(void* pvParameter);
 
 class FirebaseModule {
-       private:
+      private:
         TaskHandle_t* serverTask = nullptr;
         FirebaseData* fbdo = nullptr;
         FirebaseAuth* auth = nullptr;
@@ -45,16 +44,17 @@ class FirebaseModule {
         uint32_t getTime;
         bool connect;
 
-       public:
+      public:
         FirebaseModule(uint8_t coreIndex = 1);
         ~FirebaseModule();
         bool init();
         bool connectToWiFi(const char* ssid, const char* pwd);
         bool isConnect();
         bool update(void (*onUpdate)(void) = nullptr);
-        void addData(float newData, const char* newAddressData);
-        void sendData(uint32_t __time = 2000);
         void clearData();
+        void addData(float newData, const char* newAddressData);
+
+        void sendData(uint32_t __time = 2000);
         void setFloat(float floatData, const char* addrs);
         void setString(String strData, const char* addrs);
         float getData(const char* getAddress);

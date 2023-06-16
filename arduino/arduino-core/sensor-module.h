@@ -51,6 +51,7 @@ class SensorModule {
         void init(void (*initialize)(void) = nullptr);
         void update(void (*update)(void) = nullptr);
         void debug(int __index = -1);
+        void loop(void (*loop)(void) = nullptr);
 
         void addModule(BaseSens* sensModule);
         void removeModule(uint8_t index);
