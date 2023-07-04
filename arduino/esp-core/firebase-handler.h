@@ -12,7 +12,11 @@
 
 #include "Arduino.h"
 #include "Firebase_ESP_Client.h"
-#include "WiFi.h"
+#if defined(ESP32)
+#include <WiFi.h>
+#elif defined(ESP8266)
+#include <ESP8266WiFi.h>
+#endif
 #include "stdint.h"
 
 #define API_KEY "AIzaSyCJgnZh9hEy_4dSLUSuLRlVw4lo6P3XmU8"
@@ -30,7 +34,9 @@ void serverHandler(void* pvParameter);
 
 class FirebaseModule {
       private:
+#if defined(ESP32)
         TaskHandle_t* serverTask = nullptr;
+#endif
         FirebaseData* fbdo = nullptr;
         FirebaseAuth* auth = nullptr;
         FirebaseConfig* config = nullptr;

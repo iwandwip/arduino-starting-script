@@ -14,9 +14,11 @@ FirebaseModule::FirebaseModule(uint8_t coreIndex) {
         fbdo = new FirebaseData;
         auth = new FirebaseAuth;
         config = new FirebaseConfig;
-        serverTask = new TaskHandle_t;
         configTime(GMT_OFFSET_WIB, DAYLIGHT_OFFSET, NTP_SERVER);
+#if defined(ESP32)
+        serverTask = new TaskHandle_t;
         xTaskCreatePinnedToCore(serverHandler, "server_task", 20000, NULL, 1, serverTask, coreIndex);
+#endif
 }
 
 FirebaseModule::~FirebaseModule() {
