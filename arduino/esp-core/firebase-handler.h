@@ -19,11 +19,11 @@
 #endif
 #include "stdint.h"
 
-#define API_KEY "AIzaSyCJgnZh9hEy_4dSLUSuLRlVw4lo6P3XmU8"
-#define DATABASE_URL "https://auto-hydro-barra-default-rtdb.firebaseio.com/"
+#define API_KEY "AIzaSyAdhnefi4gfQEWSfkzqVUwMZdC8E98oNPI"
+#define DATABASE_URL "https://smoke-detector-58544-default-rtdb.firebaseio.com/"
 
-#define USER_EMAIL "auto-hydro@gmail.com"
-#define USER_PASSWORD "auto-hydro"
+#define USER_EMAIL "smoke-detector@gmail.com"
+#define USER_PASSWORD "smoke-detector"
 
 #define NTP_SERVER "pool.ntp.org"
 #define GMT_OFFSET_SEC 3600
@@ -46,9 +46,11 @@ class FirebaseModule {
         uint8_t dataLen = 0;
         uint8_t addrLen = 0;
 
+        uint8_t connectTime = 0;
         uint32_t sendTime;
         uint32_t getTime;
         bool connect;
+        bool mode;
 
       public:
         FirebaseModule(uint8_t coreIndex = 1);
